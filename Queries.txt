@@ -1,0 +1,43 @@
+/* Query 1 */
+SELECT (FirstName || ' ' || LastName) AS 'Customer Name',
+       SUM(Invoice.Total) AS 'Total Spent'
+FROM Customer
+JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10
+
+
+/* Query 2 */ 
+SELECT Genre.Name,
+       COUNT(Genre.Name) AS 'Songs Produced'
+FROM Genre
+JOIN Track ON Track.GenreId = Genre.GenreId
+GROUP BY 1
+ORDER BY 2 DESC
+
+
+/* Query 3 */ 
+SELECT Artist.Name AS 'Artist',
+       SUM(InvoiceLine.Quantity * InvoiceLine.UnitPrice) AS 'Amount Earned'
+FROM Artist
+LEFT JOIN Album ON Artist.ArtistId = Album.ArtistId
+LEFT JOIN Track ON Track.AlbumId = Album.AlbumId
+JOIN InvoiceLine ON InvoiceLine.TrackId = Track.TrackId
+GROUP BY Artist.Name
+ORDER BY 2 DESC
+LIMIT 10
+
+
+/* Query 4 */
+SELECT (Employee.FirstName || ' ' || Employee.LastName) AS 'Employee Name',
+       count(CustomerId) AS 'Number of Customers'
+FROM Employee
+JOIN Customer ON Employee.EmployeeId = Customer.SupportRepId
+GROUP BY 1
+ORDER BY 2 DESC
+
+
+
+
+
